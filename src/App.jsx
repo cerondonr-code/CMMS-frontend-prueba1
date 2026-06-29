@@ -184,7 +184,7 @@ const initialMockOrders = [
     title: "Mantenimiento Correctivo por Calentamiento",
     priority: "ALTA",
     status: "PENDIENTE",
-    assignedTo: "Técnico Eléctrico",
+    assignedTo: "Técnico Eléctricista",
   },
   {
     id: "OT-2026-002",
