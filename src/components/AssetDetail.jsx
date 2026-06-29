@@ -51,7 +51,7 @@ export default function AssetDetail({ selectedAsset, createExpressOrder }) {
                 <p className="font-mono text-gray-800 mt-0.5">{selectedAsset.serial}</p>
               </div>
               <div className="p-2.5 bg-gray-50 rounded-lg">
-                <p className="text-gray-500 font-medium">Capacidad de Diseño</p>
+                <p className="text-gray-500 font-medium">Capacidad</p>
                 <p className="font-semibold text-gray-800 mt-0.5">{selectedAsset.capacity}</p>
               </div>
               
