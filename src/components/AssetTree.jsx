@@ -14,7 +14,7 @@ export default function AssetTree({ mockAssets, selectedAsset, setSelectedAsset 
   };
 
   return (
-    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col h-[380px]">
+    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col h-auto lg:h-[380px]">
       <h3 className="text-sm font-semibold text-gray-900 mb-3 border-b pb-2">Infraestructura</h3>
       <div className="space-y-3 flex-1 overflow-y-auto pr-1">
         {mockAssets.map((zone) => (

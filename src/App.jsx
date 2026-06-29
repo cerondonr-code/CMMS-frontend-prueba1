@@ -251,7 +251,7 @@ export default function App() {
         <main className="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4">
           {activeTab === "pilar1" && (
             <>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
                 <AssetTree
                   mockAssets={mockAssets}
                   selectedAsset={selectedAsset}
