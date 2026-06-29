@@ -33,7 +33,7 @@ const mockAssets = [
         name: "Sótano - Cuartos Técnicos",
         children: [
           {
-            id: "BG-ZCOM-S1-CLAC-CHLR-01",
+            id: "BG-ZCOM-S-CLAC-CHLR-01",
             name: "Extractores Azul 2 - Sistema de Ventilación",
             status: "OPERATIVE",
             system: "Climatización",
@@ -44,7 +44,7 @@ const mockAssets = [
             lastMaintenance: "2026-05-15",
           },
           {
-            id: "BG-ZCOM-S1-HBR-BMB-01",
+            id: "BG-ZCOM-S-HBR-BMB-01",
             name: "Bomba de Agua Potable",
             status: "MAINTENANCE",
             system: "Red Hidráulica",
@@ -55,7 +55,7 @@ const mockAssets = [
             lastMaintenance: "2026-06-20",
           },
           {
-            id: "BG-ZCOM-P1-ELEC-SUB-01",
+            id: "BG-ZCOM-S-ELEC-SUB-01",
             name: "Subestación Eléctrica 1",
             status: "OPERATIVE",
             system: "Red Eléctrica",
@@ -66,7 +66,7 @@ const mockAssets = [
             lastMaintenance: "2026-02-10",
           },
           {
-            id: "BG-ZCOM-P1-ELEC-SUB-02",
+            id: "BG-ZCOM-S-ELEC-SUB-02",
             name: "Subestación Eléctrica 2",
             status: "CRITICAL",
             system: "Red Eléctrica",
@@ -122,7 +122,7 @@ const mockAssets = [
         name: "Piso 2 - Baterías Sanitarias",
         children: [
           {
-            id: "BG-ZCOM-P1-HID-BAT-21",
+            id: "BG-ZCOM-P2-HID-BAT-21",
             name: "Batería Sanitaria 21",
             status: "OPERATIVE",
             system: "Red Hidrosanitaria",
@@ -133,7 +133,7 @@ const mockAssets = [
             lastMaintenance: "2026-06-28",
           },
           {
-            id: "BG-ZCOM-P1-HID-BAT-22",
+            id: "BG-ZCOM-P2-HID-BAT-22",
             name: "Batería Sanitaria 22",
             status: "OPERATIVE",
             system: "Red Hidrosanitaria",
@@ -144,7 +144,7 @@ const mockAssets = [
             lastMaintenance: "2026-06-28",
           },
           {
-            id: "BG-ZCOM-P1-HID-BAT-23",
+            id: "BG-ZCOM-P2-HID-BAT-23",
             name: "Batería Sanitaria 23",
             status: "OPERATIVE",
             system: "Red Hidrosanitaria",
@@ -161,7 +161,7 @@ const mockAssets = [
         name: "Piso 3 - Baterías Sanitarias",
         children: [
           {
-            id: "BG-ZCOM-P1-HID-BAT-31",
+            id: "BG-ZCOM-P3-HID-BAT-31",
             name: "Batería Sanitaria 31",
             status: "OPERATIVE",
             system: "Red Hidrosanitaria",
