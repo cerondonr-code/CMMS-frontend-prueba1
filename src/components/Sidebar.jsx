@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function Sidebar({ menuItems, activeTab, setActiveTab, isOpen, setIsOpen }) {
   return (
     <aside 
-      className={`hidden md:flex flex-col bg-slate-900 text-white border-r border-slate-800 transition-all duration-400 relative ${
+      className={`hidden md:flex flex-col bg-slate-900 dark:bg-slate-950 text-white border-r border-slate-800 dark:border-slate-900 transition-all duration-400 relative ${
         isOpen ? "w-64" : "w-20"
       }`}
     >
@@ -13,11 +13,12 @@ export default function Sidebar({ menuItems, activeTab, setActiveTab, isOpen, se
         onClick={() => setIsOpen(!isOpen)}
         className="absolute -right-3 top-6 bg-emerald-500 hover:bg-emerald-600 text-white p-1 rounded-full shadow-md cursor-pointer transition-colors z-50 flex items-center justify-center"
       >
-        {isOpen ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+        {isOpen ? <ChevronLeft className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}      
       </button>
+      
 
       {/* Contenedor del Logo */}
-      <div className="p-5 border-b border-slate-800 flex items-center justify-center min-h-[90px]">
+      <div className="p-5 border-b border-slate-800 dark:border-slate-900 flex items-center justify-center min-h-[90px]">
         {isOpen ? (
           <img
             src="https://espacios-comerciales.centromayor.com.co/sites/default/files/default-disponible.png"
@@ -25,11 +26,11 @@ export default function Sidebar({ menuItems, activeTab, setActiveTab, isOpen, se
             alt="Centro Mayor Logo"
           />
         ) : (
-          /* Versión minificada del logo cuando el Sidebar se esconde */
-          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden border border-slate-700 shadow-sm shrink-0">
+          /* Versión minificada del logo: Adaptado el contenedor de fondo */
+          <div className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-700 dark:border-slate-700 shadow-sm shrink-0 transition-colors">
             <img
               src="https://espacios-comerciales.centromayor.com.co/sites/default/files/default-disponible.png"
-              className="w-16 max-w-none object-contain"
+              className="w-16 max-w-none object-contain dark:brightness-90"
               alt="Mini Logo"
             />
           </div>
@@ -49,9 +50,9 @@ export default function Sidebar({ menuItems, activeTab, setActiveTab, isOpen, se
               } ${
                 activeTab === item.id
                   ? "bg-emerald-600 text-white"
-                  : "text-slate-300 hover:bg-slate-700 hover:text-white"
+                  : "text-slate-300 hover:bg-slate-700 dark:hover:bg-slate-800/60 hover:text-white"
               }`}
-              title={!isOpen ? item.name : undefined} // Muestra tooltip nativo al poner el mouse encima si está cerrado
+              title={!isOpen ? item.name : undefined}
             >
               <Icon className={`w-5 h-5 shrink-0 ${isOpen ? "mr-3" : ""}`} />
               
@@ -63,16 +64,16 @@ export default function Sidebar({ menuItems, activeTab, setActiveTab, isOpen, se
       </nav>
 
       {/* Pie de página con versión del sistema */}
-      <div className="p-4 border-t border-slate-800 text-xs text-slate-500 text-center whitespace-nowrap overflow-hidden">
+      <div className="p-4 border-t border-slate-800 dark:border-slate-900 text-xs text-slate-500 text-center whitespace-nowrap overflow-hidden">
         {isOpen ? (
           <>
-            <p className="text-xs text-center text-slate-400 mt-1 p-2">
+            <p className="text-xs text-center text-slate-400 dark:text-slate-500 mt-1 p-2">
               CMMS - Mantenimiento
             </p>
             Versión 1.0.0 — Entorno Local
           </>
         ) : (
-          <span className="font-semibold text-slate-400">v1.0</span>
+          <span className="font-semibold text-slate-400 dark:text-slate-500">v1.0</span>
         )}
       </div>
     </aside>

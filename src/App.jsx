@@ -20,6 +20,7 @@ import AssetTree from "./components/AssetTree";
 import AssetDetail from "./components/AssetDetail";
 import KanbanBoard from "./components/KanbanBoard";
 import Header from "./components/Header";
+import { useTheme } from "./context/ThemeContext"; // <--- 1. IMPORTAMOS EL HOOK DEL TEMA
 
 // DATOS MOCK DE ALTO NIVEL
 const mockAssets = [
@@ -173,6 +174,23 @@ const mockAssets = [
           },
         ],
       },
+      {
+        id: "BG-ZCOM-T",
+        name: "Torres - Cuartos Técnicos",
+        children: [
+          {
+            id: "BG-ZCOM-T-ELEC-UPS-05",
+            name: "UPS Torre 2A - Sistema Regulado",
+            status: "OPERATIVE",
+            system: "Red Regulada",
+            brand: "APC",
+            model: "30XW1012",
+            serial: "SN-984321",
+            capacity: "15 kVA",
+            lastMaintenance: "2026-06-15",
+          },
+        ],
+      },
     ],
   },
 ];
@@ -197,6 +215,7 @@ const initialMockOrders = [
 ];
 
 export default function App() {
+  const { darkMode } = useTheme(); // <--- 2. CONSUMIMOS EL CONTEXTO EN APP
   const [activeTab, setActiveTab] = useState("pilar1");
   const [selectedAsset, setSelectedAsset] = useState(
     mockAssets[0].children[1].children[0],
@@ -213,7 +232,6 @@ export default function App() {
     { id: "serv-public", name: "Servicios Públicos", icon: Droplets },
     { id: "solicitudes", name: "Solicitudes", icon: Hand },
     { id: "config", name: "Configuración", icon: Settings },
-    //{ id: "otro", name: "Otro", icon: Menu },  handshake
   ];
 
   const moveOrderStatus = (orderId, newStatus) => {
@@ -236,7 +254,8 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100 font-sans antialiased text-gray-900">
+    // 3. CAMBIO AQUÍ: Añadimos dark:bg-slate-950 y dark:text-slate-100 al contenedor base
+    <div className="flex h-screen bg-gray-100 dark:bg-slate-950 font-sans antialiased text-gray-900 dark:text-slate-100 transition-colors duration-200">
       <Sidebar
         menuItems={menuItems}
         activeTab={activeTab}
@@ -248,7 +267,8 @@ export default function App() {
       <div className="flex flex-col flex-1 overflow-hidden">
         <Header menuItems={menuItems} activeTab={activeTab} />
 
-        <main className="flex-1 overflow-y-auto p-4 bg-gray-50 space-y-4">
+        {/* 4. CAMBIO AQUÍ: Añadimos dark:bg-slate-900 para el fondo del panel de contenido */}
+        <main className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-slate-900 space-y-4 transition-colors duration-200">
           {activeTab === "pilar1" && (
             <>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
@@ -271,9 +291,12 @@ export default function App() {
             </>
           )}
 
+          {/* 5. CAMBIO AQUÍ: Añadimos dark:bg-slate-800 y dark:border-slate-700 al módulo vacío */}
           {activeTab !== "pilar1" && (
-            <div className="bg-white p-12 rounded-xl text-center border">
-              <p className="text-gray-500">Módulo en desarrollo.</p>
+            <div className="bg-white dark:bg-slate-800 p-12 rounded-xl text-center border border-gray-200 dark:border-slate-700 transition-colors">
+              <p className="text-gray-500 dark:text-slate-400">
+                Módulo en desarrollo.
+              </p>
             </div>
           )}
         </main>
