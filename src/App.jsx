@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Wrench,
@@ -21,198 +21,9 @@ import AssetDetail from "./components/AssetDetail";
 import KanbanBoard from "./components/KanbanBoard";
 import Header from "./components/Header";
 import { useTheme } from "./context/ThemeContext"; // <--- 1. IMPORTAMOS EL HOOK DEL TEMA
+import { initialMockOrders } from "./utils/mockOrders"; // <--- 2. IMPORTAMOS LOS DATOS MOCK DE OTs
+import { mockAssets } from "./utils/mockAssets"; // <--- 3. IMPORTAMOS LOS DATOS MOCK DE ACTIVOS
 
-// DATOS MOCK DE ALTO NIVEL
-const mockAssets = [
-  {
-    id: "BG-ZCOM",
-    name: "Zona Común",
-    type: "LOCATION",
-    children: [
-      {
-        id: "BG-ZCOM-S1",
-        name: "Sótano - Cuartos Técnicos",
-        children: [
-          {
-            id: "BG-ZCOM-S-CLAC-CHLR-01",
-            name: "Extractores Azul 2 - Sistema de Ventilación",
-            status: "OPERATIVE",
-            system: "Climatización",
-            brand: "Carrier",
-            model: "30XW1012",
-            serial: "SN-984321",
-            capacity: "150 TR",
-            lastMaintenance: "2026-05-15",
-          },
-          {
-            id: "BG-ZCOM-S-HBR-BMB-01",
-            name: "Bomba de Agua Potable",
-            status: "MAINTENANCE",
-            system: "Red Hidráulica",
-            brand: "Grundfos",
-            model: "C32",
-            serial: "SN-44321",
-            capacity: "15 HP",
-            lastMaintenance: "2026-06-20",
-          },
-          {
-            id: "BG-ZCOM-S-ELEC-SUB-01",
-            name: "Subestación Eléctrica 1",
-            status: "OPERATIVE",
-            system: "Red Eléctrica",
-            brand: "Siemens",
-            model: "Sion 3AE",
-            serial: "SN-ELEC-7732",
-            capacity: "500 kVA",
-            lastMaintenance: "2026-02-10",
-          },
-          {
-            id: "BG-ZCOM-S-ELEC-SUB-02",
-            name: "Subestación Eléctrica 2",
-            status: "CRITICAL",
-            system: "Red Eléctrica",
-            brand: "Siemens",
-            model: "Sion 3AE",
-            serial: "SN-ELEC-7733",
-            capacity: "800 kVA",
-            lastMaintenance: "2026-02-10",
-          },
-        ],
-      },
-      {
-        id: "BG-ZCOM-P1",
-        name: "Piso 1 - Baterías Sanitarias",
-        children: [
-          {
-            id: "BG-ZCOM-P1-HID-BAT-11",
-            name: "Batería Sanitaria 11",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-          {
-            id: "BG-ZCOM-P1-HID-BAT-12",
-            name: "Batería Sanitaria 12",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-          {
-            id: "BG-ZCOM-P1-HID-BAT-13",
-            name: "Batería Sanitaria 13",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-        ],
-      },
-      {
-        id: "BG-ZCOM-P2",
-        name: "Piso 2 - Baterías Sanitarias",
-        children: [
-          {
-            id: "BG-ZCOM-P2-HID-BAT-21",
-            name: "Batería Sanitaria 21",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-          {
-            id: "BG-ZCOM-P2-HID-BAT-22",
-            name: "Batería Sanitaria 22",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-          {
-            id: "BG-ZCOM-P2-HID-BAT-23",
-            name: "Batería Sanitaria 23",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-        ],
-      },
-      {
-        id: "BG-ZCOM-P3",
-        name: "Piso 3 - Baterías Sanitarias",
-        children: [
-          {
-            id: "BG-ZCOM-P3-HID-BAT-31",
-            name: "Batería Sanitaria 31",
-            status: "OPERATIVE",
-            system: "Red Hidrosanitaria",
-            brand: "NA",
-            model: "NA",
-            serial: "NA",
-            capacity: "--",
-            lastMaintenance: "2026-06-28",
-          },
-        ],
-      },
-      {
-        id: "BG-ZCOM-T",
-        name: "Torres - Cuartos Técnicos",
-        children: [
-          {
-            id: "BG-ZCOM-T-ELEC-UPS-05",
-            name: "UPS Torre 2A - Sistema Regulado",
-            status: "OPERATIVE",
-            system: "Red Regulada",
-            brand: "APC",
-            model: "30XW1012",
-            serial: "SN-984321",
-            capacity: "15 kVA",
-            lastMaintenance: "2026-06-15",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const initialMockOrders = [
-  {
-    id: "OT-2026-001",
-    assetId: "BG-ZCOM-P1-ELEC-SUB-01",
-    title: "Mantenimiento Correctivo por Calentamiento",
-    priority: "ALTA",
-    status: "PENDIENTE",
-    assignedTo: "Técnico Eléctricista",
-  },
-  {
-    id: "OT-2026-002",
-    assetId: "BG-ZCOM-S1-HBR-BMB-01",
-    title: "Cambio de sellos mecánicos",
-    priority: "MEDIA",
-    status: "PROGRESO",
-    assignedTo: "Técnico Hidráulico",
-  },
-];
 
 export default function App() {
   const { darkMode } = useTheme(); // <--- 2. CONSUMIMOS EL CONTEXTO EN APP
@@ -268,7 +79,7 @@ export default function App() {
         <Header menuItems={menuItems} activeTab={activeTab} />
 
         {/* 4. CAMBIO AQUÍ: Añadimos dark:bg-slate-900 para el fondo del panel de contenido */}
-        <main className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-slate-900 space-y-4 transition-colors duration-200">
+        <main className="flex-1 overflow-y-auto p-4 bg-gray-150 dark:bg-slate-1000 space-y-4 transition-colors duration-200">
           {activeTab === "pilar1" && (
             <>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">

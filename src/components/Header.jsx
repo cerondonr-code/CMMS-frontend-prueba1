@@ -18,9 +18,9 @@ export default function Header({ menuItems, activeTab }) {
             title={darkMode ? "Activar Modo Claro" : "Activar Modo Oscuro"}
           >
             {darkMode ? (
-              <Sun className="w-4 h-4 text-amber-400" />
+              <Sun className="w-5 h-5 text-amber-400" />
             ) : (
-              <Moon className="w-4 h-4" />
+              <Moon className="w-5 h-5" />
             )}
           </button>
 
